@@ -86,19 +86,9 @@ def weather():
         #transform to json type
         json_value=json.loads(json_string)
 
+        print(json_value)
         #get the elements from json 
-    
-        #vreme = []
-        #rezultate = json_value['items']
-
-        '''for rezultat in rezultate
-            vreme_data= {
-                'lat': rezultat['coord']['lat']
-            }
-            vreme.append(vreme_data)
-
-        return render_template('weather.html', weather=vreme)'''
-
+  
         return render_template('weather.html', weather=json_value['weather'][0]['description'])
     else :
          return render_template('weather.html')
