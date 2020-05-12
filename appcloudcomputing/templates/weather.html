@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>What's the weather like?</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
+
+  <!-- Bootstrap core CSS -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<!--<link rel="shortcut icon" href="">-->
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='album.css') }}" rel="stylesheet">
+</head>
+
+<body>
+   
+    <section class="jumbotron text-center">
+      <div class="container" style="color:lightseagreen">
+        <h1 class="jumbotron-heading">What's the weather like today at your destination? </h1>
+        <p class="lead text-muted">Write your city destination down below:</p>
+        <form method="POST">
+        <div class="input-group mb-3">
+          <input type="text" name="city_name" class="form-control" id="city_name" >
+        </div>
+        <p>
+          <p class="lead text-muted">(e.g.: Bucharest)</p>
+          <button type="submit" name="submit" value="search" class="btn btn-primary my-2" style="border:2px solid DodgerBlue;">Search</button>
+        </p>
+        </form>
+        <h1></h1>
+        <div style="text-align:center">
+        {{weather}}
+        </div>
+      </div>
+      <div><p></p><p><a href="/"> Home </a></p></div>
+    </section>
+    <footer class="footer">
+    </footer>
+</body>
+
+</html>
