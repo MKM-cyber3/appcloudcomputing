@@ -23,25 +23,27 @@ https://openweathermap.org/api
 1. Exemple de request/response
     
     Ca și flux de date, prin metoda POST se trimite către server request-ul reprezentat de termenul căutat în bara de search, atât pentru API-ul de Youtube, cât și pentru cel de vreme. După accesarea API-urilor, response-ul va fi întors la aplicație prin metoda GET, sub formă de JSON. De asemenea, este importantă de menționat librăria Requests din Python. Spre **exemplu**, atunci căutăm cum este vremea în București, termenul *Bucharest* este transmis prin POST către server, iar apoi se primește răspunsul sub formă de JSON prin metoda GET.
-    
+
 2. Metode HTTP
     
     Metodele utilizate au fost GET și POST.
     <br>Metoda **POST** este utilizată pentru a trimite date către server, cu scopul de a căuta ceea ce utilizatorul își dorește și a aduce ulterior rezultatele. Metoda **GET** indică faptul că am încercat să obțin datele din resursa specificată, API-ul. Pentru a face solicitarea GET, am utilizat requests.get ().
     
     <br>Exemple:
-    ```@main.route('/weather',methods=['GET','POST'])
+    ```
+    @main.route('/weather',methods=['GET','POST'])
     
     GET /static/album.css HTTP/1.1
     POST /youtube HTTP/1.1
     GET /weather HTTP/1.1
     POST /weather HTTP/1.1
     
- 3. Autentificare și autorizare servicii utilizate
+3. Autentificare și autorizare servicii utilizate
+
     <br>La acest punct, voi detalia metoda doar pentru API-ul de YouTube, întrucât doar la acesta a fost necesar. Pentru a utiliza metodele HTTP de tip GET și POST, a fost necesară doar o cheie API pe care am inclus-o în fișierul .env din proiect, cheie care a trebuit ulterior inclusă separat la momentul deployment-ului, pe Heroku și Azure. 
     
-    ```YOUTUBE_API_KEY=AIzaSyA-T2pMN9WOlA7z_eB7NfjmVMN447N_dX0
-    
+    ```
+    YOUTUBE_API_KEY=AIzaSyA-T2pMN9WOlA7z_eB7NfjmVMN447N_dX0
     
 ## Capturi ecran aplicație
       
