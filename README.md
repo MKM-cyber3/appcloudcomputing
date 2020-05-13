@@ -1,10 +1,10 @@
 # Aplicație de tip tovarăș de călătorie  :earth_americas:
 
 ## Introducere
-<br>Aplicația **MARINA APP** își propune să fie un așa-zis travel companion digital al celor care se află într-o călătorie la momentul accesării ei și nu numai. Aplicația de căutare a fost realizată în Python cu Flask și a utilizat două API-uri. În ceea ce privește cloud-ul, a fost deployed atât pe Heroku, cât și pe Azure. Am utilizat biblioteca Python Requests pentru a apela API-ul și Flask pentru a afișa rezultatele căutării. 
+<br>Aplicația **MARINA APP** își propune să fie un așa-zis travel companion digital al celor care se află într-o călătorie la momentul accesării ei și nu numai. Aplicația **de căutare** a fost realizată în Python cu Flask și a utilizat **două API-uri**. În ceea ce privește cloud-ul, a fost publicată pe **două platforme**, pe **Heroku** (https://appcloudcomputingmarina.herokuapp.com/), dar și pe **Azure** (https://appmarina.azurewebsites.net/). Am utilizat biblioteca Python Requests pentru a apela API-ul și Flask pentru a afișa rezultatele căutării. 
 
 ## Descriere problemă
-<br>Problema pe care această aplcație web o poate rezolva este faptul că cei care călătoresc au nevoia de a căuta cu ușurință starea vremii din prezent în orașul în care se află la acel moment, iar apoi pot căuta rapid video-uri pe YouTube cu referire la ceea ce pot vizita în locația respectivă. Este o aplicație foarte utilă spre exemplu pentru cei ce călătoresc în interes de serviciu și pot astfel accesa mai facil cele două informații necesare: starea vremii și idei de călătorie. Aplicația oferă top 9 rezultate din căutarea de YouTube, lucru care este un time-saver pentru călători întrucât nu mai este nevoie să "filtreze" înșiși ei informația. De asemenea, este afișată și durata fiecărui videoclip, utilizatorul putând alege și pe baza acestui criteriu ce videoclip să vizioneze. Astfel, **MARINA APP** devine o aplicație utilă în vederea accesării rapide a informațiilor necesare călătorilor. 
+<br>Problema pe care această aplcație web o poate rezolva este faptul că cei care călătoresc au nevoia de a căuta cu ușurință starea vremii din prezent în orașul în care se află la acel moment, iar apoi pot căuta rapid video-uri pe YouTube cu referire la ceea ce pot vizita în locația respectivă. Este o aplicație foarte utilă spre exemplu pentru cei ce călătoresc în interes de serviciu și pot astfel accesa mai facil cele două informații necesare: starea vremii și idei de călătorie. Aplicația oferă top 9 rezultate din căutarea pe YouTube, lucru care este un time-saver pentru călători, întrucât nu mai este nevoie să "filtreze" ei înșiși informația. De asemenea, este afișată și durata fiecărui videoclip, utilizatorul putând alege și pe baza acestui criteriu ce videoclip să vizioneze. Astfel, **MARINA APP** devine o aplicație utilă în vederea accesării rapide a informațiilor necesare călătorilor. 
 
 ## Descriere API
 În vederea realizării aplicației, am utilizat două API-uri, **YouTube Data API** de la Google și **Open Weather Map API** de la RapidAPI.
@@ -16,17 +16,21 @@ https://developers.google.com/youtube/v3
 ###### Open Weather Map API 
 https://rapidapi.com/community/api/open-weather-map/details
 https://openweathermap.org/api
-<br>Cei de la RapidAPI oferă acest **Open Weather Map API**, prin care se pot accesa datele meteo curente pentru orice locație, inclusiv peste 200.000 de orașe, vremea actuală fiind actualizată frecvent pe baza modelelor globale și a datelor de la peste 40.000 de stații meteo. Datele sunt disponibile în format JSON, XML sau HTML, iar ca și pricing, acest API este disponibil atât pentru abonamente gratuite, cât și pentru plată, pentru cele gratuite existând un număr exact de request-uri pe care le poți face pentru accesarea vremii. Nu am ales să mă conectez la o bază de date pentru a implementa acest API. 
+<br>Cei de la RapidAPI oferă acest **Open Weather Map API**, prin care se pot accesa datele meteo curente pentru orice locație, inclusiv peste 200.000 de orașe, vremea actuală fiind actualizată frecvent pe baza modelelor globale și a datelor de la peste 40.000 de stații meteo. Datele sunt disponibile în format JSON, XML sau HTML, iar ca și pricing, acest API este disponibil atât pentru abonamente gratuite, cât și pentru plată, pentru cele gratuite existând un număr exact de request-uri pe care le poți face pentru accesarea vremii. Nu am ales să mă conectez la o bază de date pentru a implementa acest API, întrucât nu am utilizat metode de tip UPDATE, DELETE etc. 
   
 ## Flux de date
   
 1. Exemple de request/response
     
+    Ca și flux de date, prin metoda POST se trimite către server request-ul reprezentat de termenul căutat în bara de search, atât pentru API-ul de Youtube, cât și pentru cel de vreme. După accesarea API-urilor, response-ul va fi întors la aplicație prin metoda GET, sub formă de JSON. De asemenea, este importantă de menționat librăria Requests din Python. Spre **exemplu**, atunci căutăm cum este vremea în București, termenul *Bucharest* este transmis prin POST către server, iar apoi se primește răspunsul sub formă de JSON prin metoda GET.
+    
 2. Metode HTTP
     
     Metodele utilizate au fost GET și POST.
-    Exemple:
-    @main.route('/weather',methods=['GET','POST'])
+    <br>Metoda **POST** este utilizată pentru a trimite date către server, cu scopul de a căuta ceea ce utilizatorul își dorește și a aduce ulterior rezultatele. Metoda **GET** indică faptul că am încercat să obțin datele din resursa specificată, API-ul. Pentru a face solicitarea GET, am utilizat requests.get ().
+    
+    <br>Exemple:
+    ```@main.route('/weather',methods=['GET','POST'])
     
     GET /static/album.css HTTP/1.1
     POST /youtube HTTP/1.1
@@ -34,12 +38,19 @@ https://openweathermap.org/api
     POST /weather HTTP/1.1
     
  3. Autentificare și autorizare servicii utilizate
-    La acest punct, voi detalia metoda doar pentru API-ul de YouTube, întrucât doar la acesta a fost necesar. Pentru a utiliza metodele HTTP de tip GET și POST, a fost necesară doar o cheie API pe care am inclus-o în fișierul .env din proiect. 
+    <br>La acest punct, voi detalia metoda doar pentru API-ul de YouTube, întrucât doar la acesta a fost necesar. Pentru a utiliza metodele HTTP de tip GET și POST, a fost necesară doar o cheie API pe care am inclus-o în fișierul .env din proiect, cheie care a trebuit ulterior inclusă separat la momentul deployment-ului, pe Heroku și Azure. 
     
-    ```YOUTUBE_API_KEY=AIzaSyA-T2pMN9WOlA7z_eB7NfjmVMN447N_dX0```
+    ```YOUTUBE_API_KEY=AIzaSyA-T2pMN9WOlA7z_eB7NfjmVMN447N_dX0
     
     
 ## Capturi ecran aplicație
+      
+![](images/homepage.JPG) 
+![](images/weather1.JPG) 
+![](images/weather2.JPG)
+![](images/youtube1.JPG) 
+![](images/youtube2.JPG) 
+![](images/youtube3.JPG) 
       
 ## Referințe    
   - Seminarii Video Eduard Budacu
