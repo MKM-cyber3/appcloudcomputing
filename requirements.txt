@@ -11,7 +11,7 @@ isodate==0.6.0
 itsdangerous==1.1.0
 Jinja2==2.11.2
 MarkupSafe==1.1.1
-pipenv==2018.11.26
+pipenv==2022.1.8
 python-dotenv==0.13.0
 requests==2.23.0
 six==1.14.0
